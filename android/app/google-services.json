@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "973918870998",
+    "project_id": "petto-b0b20",
+    "storage_bucket": "petto-b0b20.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973918870998:android:d8bb77f1a5d5f045e49877",
+        "android_client_info": {
+          "package_name": "br.com.avantiapps.petto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqXE6_vkteR1U4gLQWzoc91NFVq8ayfV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
