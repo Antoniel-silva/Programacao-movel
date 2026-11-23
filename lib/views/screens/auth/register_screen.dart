@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../controllers/register_controller.dart';
+import '../../../core/theme/app_theme.dart';
 
 /// Tela de cadastro do Petto.
 class RegisterScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errorMessage),
-          backgroundColor: Colors.redAccent,
+          backgroundColor: AppTheme.errorRed,
         ),
       );
       return;
@@ -43,48 +44,102 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  Widget _buildFieldLabel(String label) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Text(
+        label,
+        style: const TextStyle(
+          color: AppTheme.mutedText,
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Criar conta')),
-      body: Center(
+      appBar: AppBar(
+        title: const Text('Vamos nos conhecer'),
+      ),
+      body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Cadastro',
-                style: Theme.of(context).textTheme.headlineSmall,
+              const Text(
+                'PRIMEIRO, VOCÊ · 1 DE 2',
+                style: TextStyle(
+                  color: AppTheme.primaryGreen,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.6,
+                ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 8),
+              const Text(
+                'Quem está do\noutro lado da guia?',
+                style: TextStyle(
+                  color: AppTheme.darkGreen,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  height: 1.15,
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Sua próxima amizade começa por aqui.',
+                style: TextStyle(
+                  color: AppTheme.mutedText,
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(height: 28),
+              _buildFieldLabel('Seu nome'),
               TextFormField(
                 controller: _controller.nomeController,
                 textCapitalization: TextCapitalization.words,
+                style: const TextStyle(
+                  color: AppTheme.darkGreen,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
                 decoration: const InputDecoration(
-                  labelText: 'Seu nome',
-                  border: OutlineInputBorder(),
+                  hintText: 'Ex: Marina Costa',
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
+              _buildFieldLabel('E-mail'),
               TextFormField(
                 controller: _controller.emailController,
                 keyboardType: TextInputType.emailAddress,
+                style: const TextStyle(
+                  color: AppTheme.darkGreen,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
                 decoration: const InputDecoration(
-                  labelText: 'E-mail',
-                  border: OutlineInputBorder(),
+                  hintText: 'marina.costa@email.com',
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
+              _buildFieldLabel('Senha'),
               TextFormField(
                 controller: _controller.senhaController,
                 obscureText: true,
+                style: const TextStyle(
+                  color: AppTheme.darkGreen,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
                 decoration: const InputDecoration(
-                  labelText: 'Senha',
-                  border: OutlineInputBorder(),
+                  hintText: '••••••••••',
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               CheckboxListTile(
                 value: _controller.aceitouTermos,
                 onChanged: _isLoading
@@ -98,26 +153,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 contentPadding: EdgeInsets.zero,
                 title: const Text(
                   'Concordo com os Termos de Uso e a Política de Privacidade do Petto.',
+                  style: TextStyle(
+                    color: AppTheme.mutedText,
+                    fontSize: 13,
+                    height: 1.35,
+                  ),
                 ),
               ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _isLoading ? null : _handleRegister,
-                  child: _isLoading
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Text('Criar minha conta'),
-                ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _isLoading ? null : _handleRegister,
+                child: _isLoading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text('Continuar para meu pet'),
               ),
               const SizedBox(height: 12),
-              TextButton(
-                onPressed: _isLoading ? null : () => Navigator.pop(context),
-                child: const Text('Já tenho conta'),
+              Center(
+                child: TextButton(
+                  onPressed: _isLoading ? null : () => Navigator.pop(context),
+                  child: const Text(
+                    'Já tenho conta',
+                    style: TextStyle(
+                      color: AppTheme.primaryGreen,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
